@@ -144,15 +144,12 @@ Tone: ${tone}
 Write ONLY the email reply — no commentary, no subject line label. Start directly with the greeting. Keep it concise (3-5 short paragraphs). Sound like a real human business owner. End with a clear next step or call to action.`;
 
     try {
-      const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      const resp = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 600,
-          stream: true,
           system: systemPrompt,
-          messages: [{ role: "user", content: `Customer enquiry:\n\n"${enquiry}"\n\nWrite the reply now.` }],
+          enquiry: `Customer enquiry:\n\n"${enquiry}"\n\nWrite the reply now.`,
         }),
       });
 
